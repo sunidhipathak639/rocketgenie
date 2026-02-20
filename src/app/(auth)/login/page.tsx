@@ -1,0 +1,143 @@
+'use client';
+
+import React from 'react';
+import { useForm } from 'react-hook-form';
+import { zodResolver } from '@hookform/resolvers/zod';
+import * as z from 'zod';
+import { Button } from '@/components/ui/button';
+import {
+  Form,
+  FormControl,
+  FormField,
+  FormItem,
+  FormLabel,
+  FormMessage,
+} from '@/components/ui/form';
+import { Input } from '@/components/ui/input';
+import { Card, CardHeader, CardTitle, CardContent } from '@/components/ui/card';
+import Link from 'next/link';
+
+const formSchema = z.object({
+  email: z.string().email(),
+  password: z.string().min(6),
+});
+
+export default function LoginPage() {
+  const form = useForm<z.infer<typeof formSchema>>({
+    resolver: zodResolver(formSchema),
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+
+  async function onSubmit(values: z.infer<typeof formSchema>) {
+    try {
+      const response = await fetch('/api/users/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(values),
+      });
+
+      if (response.ok) {
+        window.location.href = '/dashboard';
+      } else {
+        const data = await response.json();
+        alert(data.errors?.[0]?.message || 'Login failed');
+      }
+    } catch (error) {
+      console.error('Login error:', error);
+      alert('An error occurred during login');
+    }
+  }
+
+  return (
+    <div className="relative min-h-screen flex items-center justify-center p-6 overflow-hidden">
+      {/* Background Image with Overlay */}
+      <div className="absolute inset-0 z-0">
+        <img 
+          src="/images/auth/auth_bg.png" 
+          alt="" 
+          className="w-full h-full object-cover scale-105"
+        />
+        <div className="absolute inset-0 bg-slate-900/60 backdrop-blur-[2px]" />
+        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/40 to-transparent" />
+      </div>
+
+      <div className="relative z-10 w-full max-w-md">
+        <div className="mb-10 text-center space-y-2">
+           <Link href="/" className="inline-flex items-center gap-2 group mb-6">
+              <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-2xl shadow-blue-500/40 group-hover:scale-110 transition-transform duration-500">
+                <span className="font-black text-2xl italic">G</span>
+              </div>
+           </Link>
+           <h1 className="text-4xl font-black text-white tracking-tighter uppercase italic">
+              Welcome <span className="text-blue-500">Back</span>
+           </h1>
+           <p className="text-white/50 text-sm font-medium">Enter your credentials to access your expert panel.</p>
+        </div>
+
+        <Card className="bg-white/5 backdrop-blur-3xl border border-white/10 shadow-2xl rounded-[40px] overflow-hidden">
+          <CardContent className="p-8 md:p-10">
+            <Form {...form}>
+              <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+                <FormField
+                  control={form.control}
+                  name="email"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <FormLabel className="text-white/60 text-[10px] font-black uppercase tracking-widest ml-1">Email Address</FormLabel>
+                      <FormControl>
+                        <Input 
+                          placeholder="email@example.com" 
+                          {...field} 
+                          className="bg-white/5 border-white/10 text-white h-14 rounded-2xl px-6 focus:bg-white/10 focus:border-blue-500/50 transition-all placeholder:text-white/20"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400 text-[10px] font-bold" />
+                    </FormItem>
+                  )}
+                />
+                <FormField
+                  control={form.control}
+                  name="password"
+                  render={({ field }) => (
+                    <FormItem className="space-y-2">
+                      <div className="flex justify-between items-center">
+                        <FormLabel className="text-white/60 text-[10px] font-black uppercase tracking-widest ml-1">Password</FormLabel>
+                        <Link href="/forgot-password" size="sm" className="text-[10px] font-black uppercase tracking-widest text-blue-400 hover:text-blue-300 transition-colors">Forgot?</Link>
+                      </div>
+                      <FormControl>
+                        <Input 
+                          type="password" 
+                          placeholder="••••••••" 
+                          {...field} 
+                          className="bg-white/5 border-white/10 text-white h-14 rounded-2xl px-6 focus:bg-white/10 focus:border-blue-500/50 transition-all placeholder:text-white/20"
+                        />
+                      </FormControl>
+                      <FormMessage className="text-red-400 text-[10px] font-bold" />
+                    </FormItem>
+                  )}
+                />
+                <Button type="submit" className="w-full bg-blue-600 hover:bg-blue-700 text-white h-14 rounded-2xl font-black uppercase tracking-widest text-xs shadow-2xl shadow-blue-600/20 hover:scale-[1.02] active:scale-95 transition-all">
+                  Sign In to Genie
+                </Button>
+              </form>
+            </Form>
+
+            <div className="mt-10 pt-8 border-t border-white/5 text-center">
+              <p className="text-white/40 text-sm font-medium">
+                Don&apos;t have an account?{' '}
+                <Link href="/signup" className="text-white font-black hover:text-blue-400 transition-colors">
+                  Create Account
+                </Link>
+              </p>
+            </div>
+          </CardContent>
+        </Card>
+      </div>
+    </div>
+  );
+}
