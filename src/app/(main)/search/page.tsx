@@ -48,23 +48,37 @@ function SearchResults() {
 export default function SearchPage() {
   return (
     <div className="bg-[#fafbfc] min-h-screen pb-32">
-      {/* Search Header */}
-      <div className="bg-white border-b border-slate-100 pt-40 pb-20 mb-20">
-        <div className="container mx-auto px-4">
-          <div className="flex flex-col items-center text-center space-y-6">
-             <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em]">
+      {/* Premium Search Header */}
+      <div className="relative h-[45vh] md:h-[55vh] flex items-center overflow-hidden mb-12 md:mb-20">
+        <div className="absolute inset-0 z-0">
+          <img 
+            src="/images/search/search_bg.png" 
+            alt="Search background" 
+            className="w-full h-full object-cover scale-105"
+          />
+          <div className="absolute inset-0 bg-slate-950/40 backdrop-blur-[2px]" />
+          <div className="absolute inset-0 bg-gradient-to-r from-slate-950 via-slate-950/60 to-transparent" />
+        </div>
+
+        <div className="max-w-[1600px] w-full px-6 md:px-10 lg:px-16 relative z-10 pt-20">
+          <div className="max-w-3xl space-y-6">
+             <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-blue-500/10 backdrop-blur-xl border border-blue-400/20 text-blue-300 text-[10px] font-black uppercase tracking-[0.2em] shadow-2xl">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Search Results</span>
              </div>
-             <h1 className="text-5xl md:text-7xl font-black text-slate-900 tracking-tighter leading-none">
+             <h1 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-[0.85] uppercase italic">
                 FIND YOUR <br />
-                <span className="text-blue-600">MATCH</span>
+                <span className="text-blue-500">MATCH</span>
              </h1>
+             <p className="text-xl text-white/50 font-medium max-w-xl leading-relaxed">
+               Discovering excellence from our curated network of 
+               verified professionals and premium service providers.
+             </p>
           </div>
         </div>
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="max-w-[1600px] px-6 md:px-10 lg:px-16 relative z-10">
         <Suspense fallback={<div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
           {[1, 2, 3].map((i) => <Skeleton key={i} className="h-[450px] w-full rounded-[32px]" />)}
         </div>}>

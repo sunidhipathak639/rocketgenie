@@ -38,7 +38,7 @@ export const CitySelector = ({ onCityChange }: { onCityChange?: (cityId: string)
           <SelectValue placeholder="All Cities" />
         </div>
       </SelectTrigger>
-      <SelectContent className="rounded-2xl border-slate-100 p-2 shadow-2xl">
+      <SelectContent className="max-h-[300px] overflow-y-auto rounded-2xl border-slate-100 p-2 shadow-2xl bg-white/95 backdrop-blur-2xl scrollbar-none">
         <SelectItem value="all" className="rounded-xl font-bold">All Cities</SelectItem>
         {cities?.map((city: any) => (
           <SelectItem key={city.id} value={city.id} className="rounded-xl font-bold">

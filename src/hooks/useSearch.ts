@@ -12,15 +12,11 @@ export const useSearch = (query: string, city?: string) => {
   return useQuery({
     queryKey: ['search', debouncedQuery, city],
     queryFn: async () => {
-      if (!debouncedQuery) return [];
-      const { data } = await apiClient.get('/api/businesses', {
+      if (!debouncedQuery && !city) return [];
+      const { data } = await apiClient.get('/api/search', {
         params: {
-          where: {
-            name: {
-              contains: debouncedQuery,
-            },
-            ...(city ? { city: { equals: city } } : {}),
-          },
+          q: debouncedQuery,
+          city: city,
         },
       });
       return data.docs;
