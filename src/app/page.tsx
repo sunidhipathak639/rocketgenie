@@ -15,7 +15,7 @@ export default async function HomePage() {
 
   const categories = await payload.find({
     collection: 'categories',
-    limit: 12,
+    limit: 6,
     sort: 'order',
   });
 
@@ -38,8 +38,8 @@ export default async function HomePage() {
         </div>
         
         <div className="container mx-auto px-4 relative z-10">
-          <div className="flex flex-col md:flex-row justify-between items-end gap-10 mb-20">
-            <div className="space-y-6 max-w-2xl">
+          <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-10 mb-20">
+            <div className="space-y-6 max-w-2xl text-left">
               <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-blue-50 text-blue-600 text-[10px] font-black uppercase tracking-[0.2em] shadow-sm">
                 <Sparkles className="w-3.5 h-3.5" />
                 <span>Premium Services</span>
@@ -48,12 +48,12 @@ export default async function HomePage() {
                 EXPLORE <br />
                 <span className="text-blue-600 italic">CATEGORIES</span>
               </h2>
-              <p className="text-xl text-slate-500 font-medium">
+              <p className="text-lg md:text-xl text-slate-500 font-medium leading-relaxed">
                 The most comprehensive directory of verified local experts. 
                 Filter by service, rating, and location to find your perfect match.
               </p>
             </div>
-            <Link href="/categories" className="group">
+            <Link href="/categories" className="group hidden md:block">
               <Button variant="outline" className="rounded-full px-10 h-14 font-black border-2 border-slate-900 text-slate-900 hover:bg-slate-900 hover:text-white transition-all duration-500 uppercase tracking-widest text-xs">
                 View All Categories 
                 <div className="ml-3 p-1 rounded-full bg-slate-900 text-white group-hover:bg-white group-hover:text-slate-900 transition-colors">
@@ -63,10 +63,19 @@ export default async function HomePage() {
             </Link>
           </div>
           
-          <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-8">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
             {categories.docs.map((cat, i) => (
               <CategoryCard key={cat.id} category={cat} index={i} />
             ))}
+          </div>
+
+          <div className="mt-16 text-center md:hidden">
+            <Link href="/categories" className="group">
+              <Button className="w-full h-16 rounded-3xl bg-slate-900 text-white font-black uppercase tracking-widest text-xs shadow-2xl transition-all active:scale-95">
+                Explore All Categories 
+                <ArrowRight className="ml-3 w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Button>
+            </Link>
           </div>
         </div>
       </section>
@@ -110,7 +119,7 @@ export default async function HomePage() {
          {/* Background glow */}
          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-full h-full bg-blue-600/10 blur-[150px] pointer-events-none" />
          
-         <div className="container mx-auto mx-auto px-4 relative z-10">
+         <div className="container mx-auto px-4 relative z-10">
             <div className="grid grid-cols-2 lg:grid-cols-4 gap-12 lg:gap-8">
                {[
                  { icon: Zap, value: '25k+', label: 'Daily Searches', color: 'text-blue-400' },
@@ -133,51 +142,51 @@ export default async function HomePage() {
       </section>
 
       {/* Business Owner CTA */}
-      <section className="py-40 bg-white">
-        <div className="container mx-auto mx-auto px-4">
-          <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[64px] p-12 md:p-24 relative overflow-hidden">
+      <section className="py-24 md:py-40 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="bg-gradient-to-br from-blue-600 to-indigo-700 rounded-[40px] md:rounded-[64px] p-8 md:p-24 relative overflow-hidden">
              {/* Decorative circles */}
              <div className="absolute top-[-20%] right-[-10%] w-[50%] h-[100%] bg-white/10 rounded-full blur-[100px]" />
              <div className="absolute bottom-[-20%] left-[-10%] w-[30%] h-[60%] bg-blue-400/20 rounded-full blur-[80px]" />
              
-             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
-                <div className="space-y-10">
+             <div className="relative z-10 grid grid-cols-1 lg:grid-cols-2 gap-12 md:gap-16 items-center">
+                <div className="space-y-8 md:space-y-10">
                    <div className="inline-flex items-center gap-3 px-4 py-1.5 rounded-full bg-white/10 border border-white/20 text-white text-[10px] font-black uppercase tracking-[0.2em]">
                       Partner Program
                    </div>
-                   <h2 className="text-5xl md:text-8xl font-black text-white tracking-tighter leading-[0.85]">
+                   <h2 className="text-4xl md:text-8xl font-black text-white tracking-tighter leading-[0.85]">
                      LIST YOUR <br />
                      <span className="text-blue-200 italic font-medium">BUSINESS</span>
                    </h2>
-                   <p className="text-xl md:text-2xl text-blue-100/80 font-medium leading-relaxed max-w-lg">
+                   <p className="text-lg md:text-2xl text-blue-100/80 font-medium leading-relaxed max-w-lg">
                       Join India&apos;s fastest growing service network. 
                       Unlock premium features, get a verified badge, and connect 
-                      with high-intent customers in your area.
+                      with high-intent customers.
                    </p>
-                   <div className="flex flex-wrap gap-6 pt-4">
+                   <div className="flex flex-col sm:flex-row gap-4 md:gap-6 pt-2 md:pt-4">
                       <Link href="/free-business-listing">
-                         <Button className="h-16 px-12 rounded-2xl bg-white text-blue-600 hover:bg-blue-50 font-black uppercase tracking-widest text-xs shadow-xl transition-all hover:scale-105">
+                         <Button className="w-full sm:w-auto h-14 md:h-16 px-8 md:px-12 rounded-2xl bg-white text-blue-700 hover:bg-blue-50 font-black uppercase tracking-widest text-[10px] md:text-xs shadow-xl transition-all hover:scale-105 active:scale-95">
                            Start Free Listing
                          </Button>
                       </Link>
                       <Link href="/advertise">
-                         <Button variant="outline" className="h-16 px-12 rounded-2xl border-white/30 text-white hover:bg-white/10 font-black uppercase tracking-widest text-xs backdrop-blur-sm transition-all hover:border-white/60">
+                         <Button className="w-full sm:w-auto h-14 md:h-16 px-8 md:px-12 rounded-2xl bg-white/10 border-2 border-white/20 text-white hover:bg-white/20 font-black uppercase tracking-widest text-[10px] md:text-xs backdrop-blur-sm transition-all hover:border-white/40 active:scale-95">
                            View Ad Plans
                          </Button>
                       </Link>
                    </div>
                 </div>
                 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 md:gap-6">
                    {[
                      { title: 'Verified Badge', desc: 'Build instant trust with a premium checkmark.' },
                      { title: 'Priority Search', desc: 'Appear at the top of category results.' },
                      { title: 'Performance Hub', desc: 'Deep analytics on customer behavior.' },
                      { title: 'Direct Leads', desc: 'Receive enquiries direct to your inbox.' },
                    ].map((feature, i) => (
-                     <div key={i} className="p-8 rounded-[36px] bg-white/10 border border-white/10 backdrop-blur-xl hover:bg-white/15 transition-all">
-                        <h4 className="text-xl font-black text-white mb-3 tracking-tight leading-none">{feature.title}</h4>
-                        <p className="text-sm font-medium text-blue-100/60 leading-relaxed">{feature.desc}</p>
+                     <div key={i} className="p-6 md:p-8 rounded-[28px] md:rounded-[36px] bg-white/10 border border-white/10 backdrop-blur-xl hover:bg-white/15 transition-all">
+                        <h4 className="text-lg md:text-xl font-black text-white mb-2 md:mb-3 tracking-tight leading-none">{feature.title}</h4>
+                        <p className="text-xs md:text-sm font-medium text-blue-100/60 leading-relaxed">{feature.desc}</p>
                      </div>
                    ))}
                 </div>
@@ -188,4 +197,3 @@ export default async function HomePage() {
     </div>
   );
 }
-

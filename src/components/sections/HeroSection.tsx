@@ -94,31 +94,9 @@ export const HeroSection = () => {
             </div>
           </MotionDiv>
 
-          {/* Live Activity Stat */}
-          <MotionDiv variants={fadeInUp} className="flex flex-wrap justify-center gap-x-12 gap-y-6 pt-12">
-            {[
-              { label: 'Verified Partners', value: '1,700+' },
-              { label: 'Active Cities', value: '15+' },
-              { label: 'User Rating', value: '4.9/5' },
-            ].map((stat, i) => (
-              <div key={i} className="flex flex-col items-center">
-                <span className="text-3xl font-black text-white mb-1 tracking-tight">{stat.value}</span>
-                <span className="text-[10px] uppercase font-black tracking-[0.2em] text-blue-500/80">{stat.label}</span>
-              </div>
-            ))}
-          </MotionDiv>
         </MotionDiv>
       </div>
 
-      {/* Modern Scroll Indicator */}
-      <MotionDiv 
-        animate={{ y: [0, 10, 0] }}
-        transition={{ repeat: Infinity, duration: 2.5, ease: "easeInOut" }}
-        className="absolute bottom-12 left-1/2 -translate-x-1/2 opacity-30 flex flex-col items-center gap-3"
-      >
-        <span className="text-[10px] font-black uppercase tracking-[0.3em] text-white vertical-text">Scroll</span>
-        <div className="w-px h-12 bg-gradient-to-b from-blue-500 to-transparent" />
-      </MotionDiv>
     </MotionSection>
   );
 };

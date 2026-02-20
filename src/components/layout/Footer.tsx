@@ -7,16 +7,16 @@ export const Footer = () => {
   const currentYear = new Date().getFullYear();
   
   return (
-    <footer className="bg-[#0A0C10] text-slate-400 pt-32 pb-12 border-t border-white/5 relative overflow-hidden">
+    <footer className="bg-[#0A0C10] text-slate-400 pt-20 md:pt-32 pb-12 border-t border-white/5 relative overflow-hidden">
       {/* Background Decor */}
       <div className="absolute bottom-0 left-0 w-full h-1/2 bg-gradient-to-t from-blue-600/5 to-transparent" />
       
-      <div className="container mx-auto mx-auto px-4 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-16 mb-24">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-16 mb-24">
           
           {/* Brand Column */}
-          <div className="lg:col-span-5 space-y-8">
-            <Link href="/" className="flex items-center gap-3 group">
+          <div className="lg:col-span-5 space-y-8 text-center md:text-left">
+            <Link href="/" className="inline-flex items-center gap-3 group">
               <div className="w-12 h-12 bg-blue-600 rounded-2xl flex items-center justify-center text-white shadow-2xl shadow-blue-500/20">
                 <Rocket className="w-7 h-7 fill-current" />
               </div>
@@ -24,10 +24,10 @@ export const Footer = () => {
                 ROCKET<span className="text-blue-600">GENIE</span>
               </span>
             </Link>
-            <p className="text-xl font-medium leading-relaxed max-w-md text-slate-300">
+            <p className="text-lg md:text-xl font-medium leading-relaxed max-w-md mx-auto md:mx-0 text-slate-300">
               The premium directory for high-quality local businesses. We verify every listing to ensure you get the best expert for your needs.
             </p>
-            <div className="flex gap-4">
+            <div className="flex justify-center md:justify-start gap-4">
               {[Twitter, Instagram, Linkedin, Github].map((Icon, i) => (
                 <Link key={i} href="#" className="w-12 h-12 rounded-2xl bg-white/5 flex items-center justify-center border border-white/10 hover:bg-blue-600 hover:text-white transition-all duration-300">
                   <Icon className="w-5 h-5" />
@@ -37,9 +37,9 @@ export const Footer = () => {
           </div>
 
           {/* Links Columns */}
-          <div className="lg:col-span-7 grid grid-cols-2 md:grid-cols-3 gap-12">
+          <div className="lg:col-span-7 grid grid-cols-2 sm:grid-cols-3 gap-12">
             <div className="space-y-6">
-              <h4 className="text-white font-black uppercase tracking-widest text-xs">Platform</h4>
+              <h4 className="text-white font-black uppercase tracking-widest text-[10px]">Platform</h4>
               <ul className="space-y-4 text-sm font-bold">
                 {['Categories', 'Search', 'Featured', 'New Listings'].map(item => (
                   <li key={item}><Link href="#" className="hover:text-blue-500 transition-colors">{item}</Link></li>
@@ -47,15 +47,15 @@ export const Footer = () => {
               </ul>
             </div>
             <div className="space-y-6">
-              <h4 className="text-white font-black uppercase tracking-widest text-xs">Company</h4>
+              <h4 className="text-white font-black uppercase tracking-widest text-[10px]">Company</h4>
               <ul className="space-y-4 text-sm font-bold">
                 {['About Us', 'Our Blog', 'Contact', 'Privacy Policy'].map(item => (
                   <li key={item}><Link href="#" className="hover:text-blue-500 transition-colors">{item}</Link></li>
                 ))}
               </ul>
             </div>
-            <div className="space-y-6">
-              <h4 className="text-white font-black uppercase tracking-widest text-xs">Resources</h4>
+            <div className="space-y-6 col-span-2 sm:col-span-1">
+              <h4 className="text-white font-black uppercase tracking-widest text-[10px]">Resources</h4>
               <ul className="space-y-4 text-sm font-bold">
                 {['Free Listing', 'Pricing', 'Advertise', 'Guidelines'].map(item => (
                   <li key={item}><Link href="#" className="hover:text-blue-500 transition-colors">{item}</Link></li>
@@ -66,30 +66,31 @@ export const Footer = () => {
         </div>
 
         {/* Newsletter / CTA */}
-        <div className="bg-white/5 rounded-[40px] p-8 md:p-12 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-8 mb-24">
-           <div className="space-y-2 text-center md:text-left">
-              <h3 className="text-2xl font-black text-white">Join the Newsletter</h3>
-              <p className="font-medium text-slate-500">Get the best local deals and expert tips directly in your inbox.</p>
+        <div className="bg-white/5 rounded-[32px] md:rounded-[40px] p-8 md:p-12 border border-white/10 flex flex-col md:flex-row items-center justify-between gap-10 mb-24">
+           <div className="space-y-3 text-center md:text-left">
+              <h3 className="text-2xl md:text-3xl font-black text-white">Join the Newsletter</h3>
+              <p className="font-medium text-slate-500 max-w-sm">Get the best local deals and expert tips directly in your inbox.</p>
            </div>
-           <div className="flex w-full md:w-auto gap-2">
+           <form className="flex flex-col sm:flex-row w-full md:w-auto gap-4 lg:gap-5">
               <input 
                 type="email" 
                 placeholder="Enter your email" 
-                className="bg-white/5 border border-white/10 rounded-2xl px-6 h-14 md:w-80 text-white font-bold outline-none focus:border-blue-500 transition-colors"
+                className="bg-white/5 border border-white/10 rounded-2xl px-6 h-16 md:w-96 text-white font-bold outline-none focus:border-blue-500 transition-all flex-1 text-lg placeholder:text-slate-600"
+                required
               />
-              <Button className="bg-blue-600 hover:bg-blue-700 h-14 px-8 rounded-2xl font-black">
-                 Join <ArrowRight className="w-4 h-4 ml-2" />
+              <Button type="submit" className="bg-blue-600 hover:bg-blue-700 h-16 px-12 rounded-2xl font-black text-xs uppercase tracking-widest whitespace-nowrap shadow-2xl shadow-blue-500/20 active:scale-95 transition-all">
+                 Join Now <ArrowRight className="w-5 h-5 ml-3" />
               </Button>
-           </div>
+           </form>
         </div>
 
         {/* Bottom Bar */}
-        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6 text-[10px] font-black uppercase tracking-[0.2em]">
-           <p>© {currentYear} ROCKET GENIE. DESIGNED FOR EXCELLENCE.</p>
-           <div className="flex gap-8">
-              <Link href="#" className="hover:text-white transition-colors">Terms of Service</Link>
-              <Link href="#" className="hover:text-white transition-colors">Privacy Policy</Link>
-              <Link href="#" className="hover:text-white transition-colors">Cookie Settings</Link>
+        <div className="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-8 text-[10px] font-black uppercase tracking-[0.2em] text-center md:text-left">
+           <p className="opacity-50">© {currentYear} ROCKET GENIE. <br className="sm:hidden" /> ALL RIGHTS RESERVED.</p>
+           <div className="flex flex-wrap justify-center gap-x-8 gap-y-4">
+              <Link href="#" className="hover:text-white transition-colors">Terms</Link>
+              <Link href="#" className="hover:text-white transition-colors">Privacy</Link>
+              <Link href="#" className="hover:text-white transition-colors">Cookies</Link>
            </div>
         </div>
       </div>
