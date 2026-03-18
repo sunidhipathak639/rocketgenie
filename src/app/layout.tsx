@@ -27,11 +27,11 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     <html lang="en">
       <body className="antialiased flex flex-col min-h-screen">
         <Providers>
-          <Header />
+          {/* <Header />
           <main className="flex-grow">
             {children}
           </main>
-          <Footer />
+          <Footer /> */}
         </Providers>
       </body>
     </html>
